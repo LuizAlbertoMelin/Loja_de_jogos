@@ -1,15 +1,19 @@
 package com.minhalojadejogos.gene.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.minhalojadejogos.gene.util.Plataforma;
 
 @Entity
@@ -37,6 +41,18 @@ public class Categoria {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Plataforma plataforma;
+	
+	@OneToMany(mappedBy = "categoria")
+	@JsonIgnoreProperties("categoria")
+	private List<Produto> produtos;
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 
 	public Long getId() {
 		return id;
