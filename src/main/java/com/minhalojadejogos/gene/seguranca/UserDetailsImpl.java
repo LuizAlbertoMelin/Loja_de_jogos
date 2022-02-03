@@ -1,6 +1,7 @@
 package com.minhalojadejogos.gene.seguranca;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,16 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.minhalojadejogos.gene.model.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private String UserName;
+	private String userName;
 	private String password;
+	private List<GrantedAuthority> autorities;
 	
 	public UserDetailsImpl(Usuario user) {
-		this.UserName = user.getUsuario();
+		this.userName = user.getUsuario();
 		this.password = user.getSenha();
 	}
 	public UserDetailsImpl() {}
@@ -25,7 +24,7 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return autorities;
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return UserName;
+		return userName;
 	}
 
 	@Override
